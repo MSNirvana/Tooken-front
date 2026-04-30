@@ -1,5 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
+import { LocaleToggle } from "@/components/ui/LocaleToggle";
+import { useLocaleContext } from "@/components/providers/LocaleContext";
 
 const footerLinks = {
   产品: ["模型列表", "Auto 路由", "API 文档", "定价", "更新日志"],
@@ -9,6 +13,17 @@ const footerLinks = {
 };
 
 export function Footer() {
+  const { locale } = useLocaleContext();
+  const isZh = locale === "zh";
+  const links = isZh
+    ? footerLinks
+    : {
+        Product: ["Models", "Auto routing", "API docs", "Pricing", "Changelog"],
+        Developers: ["Quickstart", "OpenAI compatibility", "Claude Code integration", "SDK downloads", "Status page"],
+        Company: ["About", "Blog", "Contact", "Partnership"],
+        Legal: ["Terms", "Privacy", "Security"],
+      };
+
   return (
     <footer className="border-t border-white/10 bg-[var(--bg-dark)] py-14 text-white">
       <SectionWrapper>
@@ -18,10 +33,14 @@ export function Footer() {
               <Image src="/logo.png" alt="Tooken Logo" width={30} height={30} className="rounded-md object-contain" />
               Tooken
             </p>
-            <p className="mt-3 text-sm text-white/45">AGI × Web4 经济基础设施。一个 API，连接全球模型与原生结算。</p>
+            <p className="mt-3 text-sm text-white/45">
+              {isZh
+                ? "AGI × Web4 经济基础设施。一个 API，连接全球模型与原生结算。"
+                : "AGI × Web4 economic infrastructure. One API for global models and native settlement."}
+            </p>
           </div>
           <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
-            {Object.entries(footerLinks).map(([title, links]) => (
+            {Object.entries(links).map(([title, links]) => (
               <div key={title}>
                 <p className="mb-3 text-[12px] font-semibold uppercase tracking-[0.06em] text-white/50">{title}</p>
                 <div className="space-y-2.5 text-sm text-white/40">
@@ -37,7 +56,7 @@ export function Footer() {
         </div>
         <div className="mt-10 flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-6 text-sm text-white/35">
           <span>© 2026 Tooken. All rights reserved.</span>
-          <span>EN / 中文</span>
+          <LocaleToggle />
         </div>
       </SectionWrapper>
     </footer>

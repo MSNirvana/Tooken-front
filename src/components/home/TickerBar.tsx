@@ -1,7 +1,22 @@
+"use client";
+
 import { tickerItems } from "@/lib/constants";
+import { useLocaleContext } from "@/components/providers/LocaleContext";
 
 export function TickerBar() {
-  const list = [...tickerItems, ...tickerItems];
+  const { locale } = useLocaleContext();
+  const enItems = [
+    "✦ 20+ global models connected",
+    "✦ Auto intelligent routing",
+    "✦ 70% average Token cost saving",
+    "✦ x402 Web4 native settlement",
+    "✦ 99.9% availability",
+    "✦ OpenAI-compatible API",
+    "✦ Base network fast settlement",
+    "✦ Agent economic autonomy",
+  ];
+  const source = locale === "zh" ? tickerItems : enItems;
+  const list = [...source, ...source];
 
   return (
     <section className="relative overflow-hidden bg-[var(--bg-dark)] py-3">

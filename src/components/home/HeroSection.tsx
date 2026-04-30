@@ -7,8 +7,12 @@ import { Badge } from "@/components/ui/Badge";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { fadeUpVariant, staggerContainer } from "@/lib/motion";
 import { InteractiveToucan } from "@/components/home/InteractiveToucan";
+import { useLocaleContext } from "@/components/providers/LocaleContext";
 
 export function HeroSection() {
+  const { locale } = useLocaleContext();
+  const isZh = locale === "zh";
+
   return (
     <section className="relative min-h-screen overflow-hidden bg-[var(--bg-page)] pt-28">
       <div className="pointer-events-none absolute -left-36 -top-20 h-[600px] w-[600px] rounded-full bg-[radial-gradient(circle,rgba(249,115,22,0.08)_0%,transparent_70%)] blur-[60px] animate-float" />
@@ -29,22 +33,22 @@ export function HeroSection() {
             <span className="brand-gradient-text">to Web4.</span>
           </motion.h1>
           <motion.p variants={fadeUpVariant} className="mx-auto mt-6 max-w-[560px] text-[18px] leading-relaxed text-[var(--text-secondary)]">
-            做一个猜想？
+            {isZh ? "做一个猜想？" : "A hypothesis worth testing?"}
             <br />
             Tooken = Crypto Token + AI Token
           </motion.p>
           <motion.div variants={fadeUpVariant} className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <Button size="lg">
-              免费开始 <ArrowRight className="ml-1 h-4 w-4" />
+              {isZh ? "免费开始" : "Get Started"} <ArrowRight className="ml-1 h-4 w-4" />
             </Button>
             <Button size="lg" variant="secondary">
-              查看文档 <BookOpen className="ml-1 h-4 w-4 text-[var(--text-secondary)]" />
+              {isZh ? "查看文档" : "View Docs"} <BookOpen className="ml-1 h-4 w-4 text-[var(--text-secondary)]" />
             </Button>
           </motion.div>
           <motion.div variants={fadeUpVariant} className="mt-6 flex flex-wrap items-center justify-center gap-3 text-[13px] text-[var(--text-muted)]">
             <span className="inline-flex items-center gap-1.5">
               <Users size={13} className="text-[var(--text-brand)]" />
-              2,000+ 开发者信赖
+              {isZh ? "2,000+ 开发者信赖" : "Trusted by 2,000+ developers"}
             </span>
             <span>·</span>
             <span className="inline-flex items-center gap-0.5">
@@ -54,7 +58,7 @@ export function HeroSection() {
               4.9 / 5
             </span>
             <span>·</span>
-            <span>20+ 全球模型</span>
+            <span>{isZh ? "20+ 全球模型" : "20+ global models"}</span>
           </motion.div>
           <motion.div
             variants={fadeUpVariant}
@@ -81,9 +85,9 @@ const res = await client.chat.completions.create({
                 </pre>
               </div>
               <div className="p-6">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[var(--text-muted)]">Auto Route Result</p>
+                <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[var(--text-muted)]">{isZh ? "Auto 路由结果" : "Auto Route Result"}</p>
                 <p className="font-display mt-3 text-2xl font-bold">Kimi K2</p>
-                <p className="mt-1 text-sm text-[var(--text-secondary)]">中文写作优化路由</p>
+                <p className="mt-1 text-sm text-[var(--text-secondary)]">{isZh ? "中文写作优化路由" : "Chinese writing optimization route"}</p>
                 <div className="mt-6 space-y-2 text-sm">
                   <p className="text-[var(--text-muted)] line-through">15 Credits / 1K token</p>
                   <p className="font-semibold text-[var(--text-primary)]">0.5 Credits / 1K token</p>

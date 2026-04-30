@@ -6,34 +6,92 @@ import { Button } from "@/components/ui/Button";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { plans } from "@/lib/constants";
 import { cn } from "@/lib/cn";
+import { useLocaleContext } from "@/components/providers/LocaleContext";
+
+const plansEn = [
+  {
+    name: "Usage-based",
+    price: "0",
+    unit: "/month",
+    desc: "Start instantly, pay only for actual usage",
+    cta: "Start for free",
+    features: [
+      "10 requests/minute",
+      "1,000 free Credits",
+      "Access to 20+ models",
+      "Auto intelligent routing",
+      "Usage dashboard",
+      "Community support",
+    ],
+  },
+  {
+    name: "Pro",
+    price: "¥999",
+    unit: "/month",
+    desc: "Best for growing teams with included Credits",
+    cta: "Start Pro",
+    highlight: true,
+    badge: "Most Popular",
+    features: [
+      "300 requests/minute",
+      "300,000 included Credits",
+      "20% recharge discount",
+      "5 sub-accounts",
+      "Priority routing queue",
+      "ROI analytics",
+      "Email support, 8h SLA",
+    ],
+  },
+  {
+    name: "Enterprise",
+    price: "Contact us",
+    unit: "",
+    desc: "Custom SLA, dedicated API, private deployment",
+    cta: "Contact sales",
+    features: [
+      "Custom request quota",
+      "Up to 40% volume discount",
+      "Unlimited sub-accounts",
+      "Dedicated success manager",
+      "Private model deployment",
+      "Invoice & compliance support",
+      "SLA 99.99%",
+    ],
+  },
+];
 
 export function PricingSection() {
   const [mode, setMode] = useState<"usage" | "enterprise">("usage");
+  const { locale } = useLocaleContext();
+  const isZh = locale === "zh";
+  const planList = isZh ? plans : plansEn;
 
   return (
     <section className="bg-[var(--bg-subtle)] py-24">
       <SectionWrapper>
         <div className="mb-16 text-center">
-          <span className="text-[12px] font-semibold uppercase tracking-[0.06em] text-[var(--text-brand)]">定价</span>
-          <h2 className="font-display mt-3 text-[clamp(28px,3vw,44px)] font-bold">用量越大，价格越优</h2>
-          <p className="mx-auto mt-3 max-w-md text-base text-[var(--text-secondary)]">1 Credit = 0.001 USD。链上充值，即充即用，无月费锁定。</p>
+          <span className="text-[12px] font-semibold uppercase tracking-[0.06em] text-[var(--text-brand)]">{isZh ? "定价" : "pricing"}</span>
+          <h2 className="font-display mt-3 text-[clamp(28px,3vw,44px)] font-bold">{isZh ? "用量越大，价格越优" : "The more you use, the better the price"}</h2>
+          <p className="mx-auto mt-3 max-w-md text-base text-[var(--text-secondary)]">
+            {isZh ? "1 Credit = 0.001 USD。链上充值，即充即用，无月费锁定。" : "1 Credit = 0.001 USD. Recharge on-chain and pay as you go."}
+          </p>
           <div className="mt-6 inline-flex rounded-full border border-[var(--border-default)] bg-white p-1">
             <button
               onClick={() => setMode("usage")}
               className={cn("rounded-full px-5 py-2 text-sm font-medium transition", mode === "usage" ? "bg-[var(--bg-dark)] text-white" : "text-[var(--text-secondary)]")}
             >
-              按量付费
+              {isZh ? "按量付费" : "Usage-based"}
             </button>
             <button
               onClick={() => setMode("enterprise")}
               className={cn("rounded-full px-5 py-2 text-sm font-medium transition", mode === "enterprise" ? "bg-[var(--bg-dark)] text-white" : "text-[var(--text-secondary)]")}
             >
-              企业套餐
+              {isZh ? "企业套餐" : "Enterprise"}
             </button>
           </div>
         </div>
         <div className="grid gap-5 lg:grid-cols-3">
-          {plans.map((plan) => (
+          {planList.map((plan) => (
             <article
               key={plan.name}
               className={cn(

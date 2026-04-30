@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
+import { useLocaleContext } from "@/components/providers/LocaleContext";
 
 const stats = [
   { value: 20, suffix: "+", label: "接入模型数量", sub: "持续增加" },
@@ -32,6 +33,8 @@ function useInView() {
 }
 
 export function StatsSection() {
+  const { locale } = useLocaleContext();
+  const isZh = locale === "zh";
   const { ref, show } = useInView();
   const [progress, setProgress] = useState(0);
 
@@ -46,6 +49,20 @@ export function StatsSection() {
     };
     requestAnimationFrame(tick);
   }, [show]);
+
+  const labels = isZh
+    ? [
+        { label: "接入模型数量", sub: "持续增加" },
+        { label: "平均成本节省", sub: "vs 直接调用" },
+        { label: "平台可用率", sub: "SLA 保障" },
+        { label: "Base 网络到账", sub: "手续费 < $0.01" },
+      ]
+    : [
+        { label: "Connected models", sub: "growing continuously" },
+        { label: "Average cost saved", sub: "vs direct invocation" },
+        { label: "Platform availability", sub: "SLA guaranteed" },
+        { label: "Base settlement", sub: "fee < $0.01" },
+      ];
 
   return (
     <section
@@ -65,8 +82,8 @@ export function StatsSection() {
                   {item.value % 1 === 0 ? Math.round(value) : value.toFixed(1)}
                   {item.suffix}
                 </p>
-                <p className="mt-3 text-base text-white/85">{item.label}</p>
-                <p className="mt-1 text-sm text-white/65">{item.sub}</p>
+                <p className="mt-3 text-base text-white/85">{labels[index].label}</p>
+                <p className="mt-1 text-sm text-white/65">{labels[index].sub}</p>
               </div>
             );
           })}

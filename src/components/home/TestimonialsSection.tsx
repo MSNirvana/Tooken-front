@@ -5,17 +5,30 @@ import { Star } from "lucide-react";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { testimonials } from "@/lib/constants";
 import { fadeUpVariant } from "@/lib/motion";
+import { useLocaleContext } from "@/components/providers/LocaleContext";
+
+const testimonialsEn = [
+  { content: "Auto routing is smart. Our monthly bill dropped from $800 to $180 in similar workloads.", author: "Zhang Wei", role: "CTO @ AI startup", avatar: "ZW" },
+  { content: "Our Agent now recharges itself through x402. The payment flow is fully autonomous.", author: "Li Wei", role: "Blockchain Engineer", avatar: "LW" },
+  { content: "Only two lines changed for integration. OpenAI compatibility is excellent.", author: "Chen Hao", role: "Indie Developer", avatar: "CH" },
+  { content: "One command in Claude Code, and now Claude Opus 4 is both better and cheaper.", author: "Sarah K.", role: "Full-stack Developer", avatar: "SK" },
+  { content: "Self-healing route fallback works. Upstream failures are invisible to end users.", author: "Wang Lei", role: "Backend Engineer", avatar: "WL" },
+  { content: "Sub-account budget control is great for teams running multiple Agents.", author: "Lin", role: "AI Program Lead", avatar: "L" },
+];
 
 export function TestimonialsSection() {
+  const { locale } = useLocaleContext();
+  const isZh = locale === "zh";
+  const list = isZh ? testimonials : testimonialsEn;
   return (
     <section className="bg-[var(--bg-page)] py-24">
       <SectionWrapper>
         <div className="mb-14 text-center">
-          <span className="text-[12px] font-semibold uppercase tracking-[0.06em] text-[var(--text-muted)]">用户评价</span>
-          <h2 className="font-display mt-3 text-[clamp(28px,3vw,44px)] font-bold">开发者们都在用 Tooken</h2>
+          <span className="text-[12px] font-semibold uppercase tracking-[0.06em] text-[var(--text-muted)]">{isZh ? "用户评价" : "testimonials"}</span>
+          <h2 className="font-display mt-3 text-[clamp(28px,3vw,44px)] font-bold">{isZh ? "开发者们都在用 Tooken" : "Developers are building with Tooken"}</h2>
         </div>
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {testimonials.map((item, index) => (
+          {list.map((item, index) => (
             <motion.article
               key={`${item.author}-${index}`}
               variants={fadeUpVariant}

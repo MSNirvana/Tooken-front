@@ -84,13 +84,19 @@ export function FeaturesSection() {
           <motion.div variants={fadeUpVariant} className="mb-14 text-center">
             <span className="text-[12px] font-semibold uppercase tracking-[0.06em] text-[var(--text-brand)]">{isZh ? "核心能力" : "Core capabilities"}</span>
             <h2 className="font-display mt-3 text-[clamp(28px,3vw,44px)] font-bold leading-tight tracking-[-0.025em]">
-              {isZh ? "三层架构，完整覆盖" : "Three-layer architecture"}
+              {isZh ? "三层架构覆盖" : "Three-layer architecture"}
               <br />
               {isZh ? "AI 经济基础设施" : "for AI economic infrastructure"}
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-[18px] leading-relaxed text-[var(--text-secondary)]">
               {isZh
-                ? "从模型调用到链上结算，Tooken 是第一个将 AGI 与 Web4 原生融合的平台。"
+                ? (
+                  <>
+                    从模型调用到链上结算，
+                    <br />
+                    Tooken 是第一个将 AGI 与 Web4 原生融合的平台。
+                  </>
+                )
                 : "From model invocation to on-chain settlement, Tooken is the first platform to merge AGI with native Web4 economics."}
             </p>
           </motion.div>

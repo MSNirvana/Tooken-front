@@ -30,7 +30,7 @@ export function HeroSection() {
           <motion.h1 variants={fadeUpVariant} className="font-display mt-6 text-[clamp(52px,7vw,96px)] font-black leading-[0.98] tracking-[-0.04em]">
             <span className="text-[var(--text-primary)]">Bringing AGI</span>
             <br />
-            <span className="brand-gradient-text">to Web4.</span>
+            <span className="brand-gradient-text mt-2 inline-block">to Web4.</span>
           </motion.h1>
           <motion.p variants={fadeUpVariant} className="mx-auto mt-6 max-w-[560px] text-[18px] leading-relaxed text-[var(--text-secondary)]">
             {isZh ? "做一个猜想？" : "A hypothesis worth testing?"}

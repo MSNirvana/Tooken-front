@@ -11,7 +11,6 @@ import { useLocaleContext } from "@/components/providers/LocaleContext";
 
 const links = [
   { zh: "模型", en: "Models", href: "#models" },
-  { zh: "定价", en: "Pricing", href: "/pricing" },
   { zh: "文档", en: "Docs", href: "/docs" },
   { zh: "博客", en: "Blog", href: "#" },
 ];
@@ -36,12 +35,12 @@ export function Navbar() {
           scrolled && "border-[var(--border-subtle)] bg-[rgba(250,250,248,0.85)] backdrop-blur-xl",
         )}
       >
-        <div className="section-shell flex h-16 items-center justify-between">
+        <div className="section-shell relative flex h-16 items-center justify-between">
           <Link href="/" className="inline-flex items-center gap-2 font-display text-xl font-bold text-[var(--text-primary)]">
             <Image src="/logo.png" alt="Tooken Logo" width={28} height={28} className="rounded-md object-contain" />
             Tooken
           </Link>
-          <nav className="hidden gap-8 text-[15px] font-medium text-[var(--text-secondary)] md:flex">
+          <nav className="hidden absolute left-1/2 -translate-x-1/2 gap-8 text-[15px] font-medium text-[var(--text-secondary)] md:flex">
             {links.map((item) => (
               <Link key={item.en} href={item.href} className="transition-colors hover:text-[var(--text-primary)]">
                 {locale === "zh" ? item.zh : item.en}
@@ -50,8 +49,9 @@ export function Navbar() {
           </nav>
           <div className="hidden items-center gap-2 md:flex">
             <LocaleToggle variant="ghost" />
-            <Button variant="secondary">{locale === "zh" ? "登录" : "Log in"}</Button>
-            <Button>{locale === "zh" ? "开始使用 →" : "Get Started →"}</Button>
+            <Button className="relative h-10 overflow-hidden border-[0.5px] border-white/45 px-5 text-sm shadow-[0_6px_16px_rgba(249,115,22,0.22)] after:pointer-events-none after:absolute after:inset-0 after:bg-[linear-gradient(115deg,rgba(255,255,255,0)_18%,rgba(255,255,255,0.34)_48%,rgba(255,255,255,0)_78%)] after:opacity-0 after:transition-opacity after:duration-300 hover:shadow-[0_10px_24px_rgba(249,115,22,0.3)] hover:after:opacity-100">
+              {locale === "zh" ? "免费开始" : "Start Free"}
+            </Button>
           </div>
           <button className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--border-default)] md:hidden" onClick={() => setMenuOpen((v) => !v)}>
             {menuOpen ? <X size={18} /> : <Menu size={18} />}
@@ -68,8 +68,9 @@ export function Navbar() {
             ))}
             <div className="mt-4 flex gap-3">
               <LocaleToggle variant="ghost" />
-              <Button variant="secondary">{locale === "zh" ? "登录" : "Log in"}</Button>
-              <Button>{locale === "zh" ? "开始使用" : "Get Started"}</Button>
+              <Button className="relative h-10 overflow-hidden border-[0.5px] border-white/45 px-5 text-sm shadow-[0_6px_16px_rgba(249,115,22,0.22)] after:pointer-events-none after:absolute after:inset-0 after:bg-[linear-gradient(115deg,rgba(255,255,255,0)_18%,rgba(255,255,255,0.34)_48%,rgba(255,255,255,0)_78%)] after:opacity-0 after:transition-opacity after:duration-300 hover:shadow-[0_10px_24px_rgba(249,115,22,0.3)] hover:after:opacity-100">
+                {locale === "zh" ? "免费开始" : "Start Free"}
+              </Button>
             </div>
           </div>
         </div>

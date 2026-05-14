@@ -49,9 +49,9 @@ export function HeroSection() {
         short: "KM",
         logo: "/logos/ai/kimi.svg",
         versions: [
-          { version: "Kimi-K2.5", category: "多模态 旗舰" },
-          { version: "Kimi-K2", category: "长上下文" },
-          { version: "Kimi-1.5", category: "推理 文本" },
+          { version: "Kimi-K2.5", category: "多模态 思考" },
+          { version: "Kimi-K2", category: "文本 长上下文" },
+          { version: "Kimi-1.5", category: "思考 文本" },
           { version: "Kimi-1.3", category: "通用" },
         ],
       },
@@ -61,10 +61,10 @@ export function HeroSection() {
         short: "CL",
         logo: "/logos/ai/claude.svg",
         versions: [
-          { version: "Claude Opus 4.7", category: "旗舰 推理" },
+          { version: "Claude Opus 4.7", category: "思考 文本" },
           { version: "Claude Sonnet 4.6", category: "编码 文本" },
           { version: "Claude Haiku 4.5", category: "轻量响应" },
-          { version: "Claude Opus 4.6", category: "复杂任务" },
+          { version: "Claude Opus 4.6", category: "思考 编程" },
         ],
       },
       {
@@ -75,9 +75,9 @@ export function HeroSection() {
         versions: [
           { version: "GPT-5.5", category: "编程 文本" },
           { version: "GPT-5.5 Instant", category: "低延迟" },
-          { version: "GPT-5.5 Pro", category: "高推理" },
-          { version: "GPT-5.4", category: "通用" },
-          { version: "GPT-4.1", category: "兼容" },
+          { version: "GPT-5.5 Pro", category: "思考 编程" },
+          { version: "GPT-5.4", category: "文本 思考" },
+          { version: "GPT-4.1", category: "编程 多模态" },
         ],
       },
       {
@@ -86,7 +86,7 @@ export function HeroSection() {
         short: "GM",
         logo: "/logos/ai/gemini.svg",
         versions: [
-          { version: "Gemini 3.1 Pro", category: "旗舰 推理" },
+          { version: "Gemini 3.1 Pro", category: "思考 多模态" },
           { version: "Gemini 3 Pro", category: "多模态" },
           { version: "Gemini 2.5 Pro", category: "长上下文" },
           { version: "Gemini 2.0 Flash", category: "低延迟" },
@@ -98,10 +98,10 @@ export function HeroSection() {
         short: "DS",
         logo: "/logos/ai/deepseek.svg",
         versions: [
-          { version: "DeepSeek V4-Pro", category: "旗舰 通用" },
+          { version: "DeepSeek V4-Pro", category: "思考 文本" },
           { version: "DeepSeek V4-Flash", category: "低延迟" },
-          { version: "DeepSeek V3.1", category: "混合推理" },
-          { version: "DeepSeek R1", category: "推理" },
+          { version: "DeepSeek V3.1", category: "思考 编程" },
+          { version: "DeepSeek R1", category: "思考" },
         ],
       },
       {
@@ -110,10 +110,10 @@ export function HeroSection() {
         short: "QW",
         logo: "/logos/ai/qwen.svg",
         versions: [
-          { version: "Qwen3-Max", category: "旗舰 推理" },
-          { version: "Qwen3-235B-A22B", category: "MoE 旗舰" },
-          { version: "Qwen3-32B", category: "通用" },
-          { version: "Qwen2.5-Max", category: "稳定" },
+          { version: "Qwen3-Max", category: "思考 文本" },
+          { version: "Qwen3-235B-A22B", category: "思考 编程" },
+          { version: "Qwen3-32B", category: "文本" },
+          { version: "Qwen2.5-Max", category: "文本 多语言" },
         ],
       },
       {
@@ -122,10 +122,10 @@ export function HeroSection() {
         short: "GL",
         logo: "/logos/ai/glm.svg",
         versions: [
-          { version: "GLM-5.1", category: "旗舰 Agent" },
-          { version: "GLM-5", category: "推理 编程" },
+          { version: "GLM-5.1", category: "思考 编程" },
+          { version: "GLM-5", category: "思考 文本" },
           { version: "GLM-4.5", category: "文本 推理" },
-          { version: "GLM-4-Air", category: "轻量" },
+          { version: "GLM-4-Air", category: "低延迟" },
         ],
       },
       {
@@ -134,9 +134,9 @@ export function HeroSection() {
         short: "MM",
         logo: "/logos/ai/minimax.svg",
         versions: [
-          { version: "MiniMax-M2.7", category: "旗舰 文本" },
-          { version: "MiniMax-M2.5", category: "稳定 通用" },
-          { version: "abab-6.5", category: "历史旗舰" },
+          { version: "MiniMax-M2.7", category: "文本 思考" },
+          { version: "MiniMax-M2.5", category: "文本 多模态" },
+          { version: "abab-6.5", category: "文本 对话" },
           { version: "MiniMax-Text-01", category: "文本" },
         ],
       },

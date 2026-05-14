@@ -78,7 +78,8 @@ export function FeaturesSection() {
   const featureList = isZh ? features : featuresEn;
 
   return (
-    <section className="bg-white py-16 md:py-24">
+    <section className="relative overflow-hidden bg-[linear-gradient(180deg,#ffffff_0%,#f8fafc_30%,#dde4ef_56%,var(--bg-dark)_88%,var(--bg-dark)_100%)] py-16 md:py-24">
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-[linear-gradient(180deg,rgba(26,26,30,0)_0%,var(--bg-dark)_100%)]" />
       <SectionWrapper>
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer}>
           <motion.div variants={fadeUpVariant} className="mb-14 text-center">

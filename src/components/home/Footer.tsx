@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
-import { LocaleToggle } from "@/components/ui/LocaleToggle";
 import { useLocaleContext } from "@/components/providers/LocaleContext";
 
 const footerLinks = {
@@ -30,7 +29,7 @@ export function Footer() {
         <div className="grid gap-10 lg:grid-cols-[1.1fr_3fr]">
           <div>
             <p className="inline-flex items-center gap-2 font-display text-2xl font-bold">
-              <Image src="/logo.png" alt="Tooken Logo" width={30} height={30} className="rounded-md object-contain" />
+              <Image src="/footer-logo.png" alt="Tooken Logo" width={30} height={30} className="rounded-md object-contain" />
               Tooken
             </p>
             <p className="mt-3 text-sm text-white/45">
@@ -54,9 +53,8 @@ export function Footer() {
             ))}
           </div>
         </div>
-        <div className="mt-10 flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-6 text-sm text-white/35">
+        <div className="mt-10 flex flex-wrap items-center gap-3 border-t border-white/10 pt-6 text-sm text-white/35">
           <span>© 2026 Tooken. All rights reserved.</span>
-          <LocaleToggle />
         </div>
       </SectionWrapper>
     </footer>

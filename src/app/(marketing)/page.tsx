@@ -13,9 +13,9 @@ export default function LandingPage() {
       <Navbar />
       <HeroSection />
       <TickerBar />
-      <FeaturesSection />
-      <ModelsMarquee />
       <RoutingDemo />
+      <ModelsMarquee />
+      <FeaturesSection />
       <CtaBanner />
       <Footer />
     </main>

@@ -12,16 +12,16 @@ export const tickerItems = [
 ];
 
 export const models = [
-  { name: "GPT-5", provider: "OpenAI", category: "顶级", color: "#00A67E" },
-  { name: "Claude Opus 4", provider: "Anthropic", category: "顶级", color: "#CC6B3D" },
-  { name: "Gemini Ultra", provider: "Google", category: "顶级", color: "#4285F4" },
-  { name: "Kimi K2", provider: "月之暗面", category: "国产", color: "#1A1A2E" },
-  { name: "DeepSeek V3", provider: "DeepSeek", category: "国产", color: "#006FFF" },
-  { name: "Qwen Max", provider: "阿里云", category: "国产", color: "#FF6A00" },
-  { name: "Minimax", provider: "MiniMax", category: "国产", color: "#7C3AED" },
-  { name: "Doubao Pro", provider: "字节跳动", category: "国产", color: "#1664FF" },
-  { name: "Llama 3", provider: "Meta", category: "开源", color: "#0668E1" },
-  { name: "Mistral", provider: "Mistral", category: "开源", color: "#FF7000" },
+  { name: "GPT-5.5", provider: "OpenAI", category: "编程", color: "#00A67E" },
+  { name: "Claude Opus 4.7", provider: "Anthropic", category: "思考", color: "#CC6B3D" },
+  { name: "Gemini 3.1 Pro", provider: "Google", category: "多模态", color: "#4285F4" },
+  { name: "Kimi-K2.5", provider: "月之暗面", category: "文本", color: "#1A1A2E" },
+  { name: "DeepSeek V4-Pro", provider: "DeepSeek", category: "思考", color: "#006FFF" },
+  { name: "Qwen3-Max", provider: "阿里云", category: "文本", color: "#FF6A00" },
+  { name: "MiniMax-M2.7", provider: "MiniMax", category: "文本", color: "#7C3AED" },
+  { name: "Doubao 1.5 Pro", provider: "字节跳动", category: "低延迟", color: "#1664FF" },
+  { name: "Llama 4", provider: "Meta", category: "多模态", color: "#0668E1" },
+  { name: "Mistral Large", provider: "Mistral", category: "思考", color: "#FF7000" },
 ];
 
 export const routeStrategies = [

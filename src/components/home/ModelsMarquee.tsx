@@ -17,7 +17,17 @@ function Row({ reverse = false, isZh }: { reverse?: boolean; isZh: boolean }) {
           <span className="h-2 w-2 rounded-full" style={{ backgroundColor: item.color }} />
           <span className="font-display text-[15px] font-bold">{item.name}</span>
           <span className="rounded-full bg-amber-50 px-2 py-0.5 text-[10px] text-amber-700">
-            {isZh ? item.category : item.category === "顶级" ? "top" : item.category === "国产" ? "cn" : "open"}
+              {isZh
+                ? item.category
+                : item.category === "编程"
+                  ? "coding"
+                  : item.category === "思考"
+                    ? "reasoning"
+                    : item.category === "多模态"
+                      ? "multimodal"
+                      : item.category === "低延迟"
+                        ? "low-latency"
+                        : "text"}
           </span>
         </div>
       ))}

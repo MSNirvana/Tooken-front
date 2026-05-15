@@ -42,15 +42,23 @@ npm ci
 echo "🔨 构建中（输出到 $STAGING_DIR）..."
 NEXT_DIST_DIR="$STAGING_DIR" npm run build
 
+# 还原 tsconfig.json（Next.js 会自动注入 .next-staging 路径）
+git checkout -- tsconfig.json 2>/dev/null || true
+
 # ---- 4. 原子替换 ----
 echo "🔄 切换构建产物..."
 rm -rf .next-old
 [ -d .next ] && mv .next .next-old
 mv "$STAGING_DIR" .next
 
-# ---- 5. 重启 PM2（优雅重载）----
+# ---- 5. 重启 PM2（优雅重载，首次则启动）----
 echo "♻️  重载 PM2 进程..."
-pm2 reload "$PM2_APP_NAME"
+if pm2 describe "$PM2_APP_NAME" > /dev/null 2>&1; then
+  pm2 reload "$PM2_APP_NAME"
+else
+  pm2 start ecosystem.config.cjs
+  pm2 save
+fi
 
 # ---- 6. 清理旧构建 ----
 rm -rf .next-old

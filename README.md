@@ -39,7 +39,7 @@ src/app/
 
 ## 生产部署
 
-域名：`tooken.ai`，端口 `:3000`，PM2 进程名 `tooken-web`。
+域名：`tooken.ai`，端口 `:3200`，PM2 进程名 `tooken-web`。
 
 ### 零停机部署
 

@@ -66,4 +66,4 @@ fi
 rm -rf .next-old
 
 echo "✅ 部署完成！$(date '+%Y-%m-%d %H:%M:%S')"
-echo "   访问: http://localhost:3000"
+echo "   访问: http://localhost:3200"

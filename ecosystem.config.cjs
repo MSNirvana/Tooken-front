@@ -2,7 +2,7 @@
 const app = {
   name: 'tooken-web',
   script: 'node_modules/next/dist/bin/next',
-  args: 'start -p 3000',
+  args: 'start -p 3200',
   cwd: '/root/projects/Tooken-front',
 
   // Next.js 不支持 cluster 模式，必须用 fork
@@ -15,7 +15,7 @@ const app = {
   // 环境变量
   env: {
     NODE_ENV: 'production',
-    PORT: 3000,
+    PORT: 3200,
   },
 
   // 日志

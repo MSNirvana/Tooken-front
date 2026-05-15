@@ -1,0 +1,34 @@
+# =============================================================================
+# tooken.ai — nginx 配置（官网）
+# =============================================================================
+# 官网 Next.js (:3000)
+# HTTPS 由 Cloudflare 处理，nginx 只监听 80
+# =============================================================================
+# 部署：cp nginx.conf.example /etc/nginx/conf.d/tooken.ai.conf
+#       nginx -t && nginx -s reload
+# =============================================================================
+
+server {
+    listen 80;
+    server_name tooken.ai www.tooken.ai;
+
+    access_log /var/log/nginx/tooken.ai.access.log;
+    error_log  /var/log/nginx/tooken.ai.error.log;
+
+    # Next.js 静态资源（长缓存）
+    location /_next/static/ {
+        proxy_pass http://127.0.0.1:3000;
+        add_header Cache-Control "public, max-age=31536000, immutable";
+        proxy_set_header Host $http_host;
+    }
+
+    # 官网前端
+    location / {
+        proxy_pass http://127.0.0.1:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Host              $http_host;
+        proxy_set_header X-Real-IP         $remote_addr;
+        proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}

@@ -31,7 +31,9 @@ echo "   时间: $(date '+%Y-%m-%d %H:%M:%S')"
 # ---- 1. 拉取代码 ----
 if [ "$SKIP_PULL" = false ]; then
   echo "📥 拉取最新代码..."
+  git stash --quiet 2>/dev/null || true
   git pull --rebase
+  git stash pop --quiet 2>/dev/null || true
 fi
 
 # ---- 2. 安装依赖 ----

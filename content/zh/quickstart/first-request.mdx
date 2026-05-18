@@ -1,0 +1,14 @@
+---
+title: 发送第一个请求
+description: 使用 Tooken 网关发起首个 Chat 请求。
+updatedAt: 2026-05
+---
+
+## 最小调用示例
+
+```bash
+curl https://api.tooken.ai/v1/chat/completions \
+  -H "Authorization: Bearer $TOOKEN_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"model":"auto","messages":[{"role":"user","content":"Hello"}]}'
+```

@@ -40,6 +40,10 @@ export function HeroSection() {
   const [hoveredPopupX, setHoveredPopupX] = useState<number | null>(null);
   const [logoSwapTick, setLogoSwapTick] = useState(0);
   const marqueeViewportRef = useRef<HTMLDivElement | null>(null);
+  const [placeholderIndex, setPlaceholderIndex] = useState(0);
+  const [placeholderText, setPlaceholderText] = useState("");
+  const [isDeletingPlaceholder, setIsDeletingPlaceholder] = useState(false);
+  const [isPlaceholderHolding, setIsPlaceholderHolding] = useState(false);
 
   const models = useMemo<ModelOption[]>(
     () => [
@@ -169,6 +173,32 @@ export function HeroSection() {
     ],
     [],
   );
+  const placeholderPhrases = useMemo(
+    () =>
+      isZh
+        ? [
+            "有问题，尽管问",
+            "想知道什么，直接问我",
+            "输入你的问题",
+            "我来帮你解答",
+            "有什么可以帮你？",
+            "随时提问",
+            "想了解什么？",
+            "请输入你的问题",
+          ]
+        : [
+            "Do what you love ...",
+            "Ask anything",
+            "Just ask me anything",
+            "Type your question",
+            "I'm here to help",
+            "How can I help?",
+            "Ask me anytime",
+            "What would you like to know?",
+            "Enter your question",
+          ],
+    [isZh],
+  );
 
   useEffect(() => {
     const timer = window.setInterval(() => {
@@ -178,11 +208,61 @@ export function HeroSection() {
     return () => window.clearInterval(timer);
   }, []);
 
+  useEffect(() => {
+    if (question.trim().length > 0 || placeholderPhrases.length === 0) return;
+
+    const currentPhrase = placeholderPhrases[placeholderIndex] ?? "";
+    const typingSpeed = 58;
+    const deletingSpeed = 36;
+    const holdAfterTyped = 1100;
+    const holdAfterDeleted = 220;
+    let timer: number;
+
+    if (!isDeletingPlaceholder && placeholderText.length < currentPhrase.length) {
+      timer = window.setTimeout(() => {
+        setPlaceholderText(currentPhrase.slice(0, placeholderText.length + 1));
+      }, typingSpeed);
+    } else if (!isDeletingPlaceholder && placeholderText.length === currentPhrase.length && !isPlaceholderHolding) {
+      timer = window.setTimeout(() => {
+        setIsPlaceholderHolding(true);
+      }, holdAfterTyped);
+    } else if (isPlaceholderHolding) {
+      timer = window.setTimeout(() => {
+        setIsPlaceholderHolding(false);
+        setIsDeletingPlaceholder(true);
+      }, 120);
+    } else if (isDeletingPlaceholder && placeholderText.length > 0) {
+      timer = window.setTimeout(() => {
+        setPlaceholderText((prev) => prev.slice(0, -1));
+      }, deletingSpeed);
+    } else {
+      timer = window.setTimeout(() => {
+        setIsDeletingPlaceholder(false);
+        setPlaceholderIndex((prev) => (prev + 1) % placeholderPhrases.length);
+      }, holdAfterDeleted);
+    }
+
+    return () => window.clearTimeout(timer);
+  }, [question, placeholderPhrases, placeholderIndex, placeholderText, isDeletingPlaceholder, isPlaceholderHolding]);
+
+  useEffect(() => {
+    setPlaceholderIndex(0);
+    setPlaceholderText("");
+    setIsDeletingPlaceholder(false);
+    setIsPlaceholderHolding(false);
+  }, [isZh]);
+
   const showFirstO = logoSwapTick % 2 === 0;
   const logoIndex = logoSwapTick % aiTokenLogos.length;
   const currentAiLogo = aiTokenLogos[logoIndex % aiTokenLogos.length];
   const currentCryptoLogo = cryptoTokenLogos[logoIndex % cryptoTokenLogos.length];
   const hoveredModel = hoveredModelId ? models.find((model) => model.id === hoveredModelId) ?? null : null;
+  const handleSendQuestion = () => {
+    const trimmedQuestion = question.trim();
+    if (!trimmedQuestion) return;
+    const targetUrl = `https://app.tooken.ai/chat?message=${encodeURIComponent(trimmedQuestion)}`;
+    window.location.assign(targetUrl);
+  };
 
   return (
     <section className="relative min-h-screen overflow-hidden bg-[var(--bg-page)] pt-44">
@@ -233,10 +313,10 @@ export function HeroSection() {
                     <span className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[rgba(249,115,22,0.14)] text-[10px] font-bold text-orange-700">
                       3
                     </span>
-                    <span className="font-medium text-[var(--text-primary)]">一行 API 直连全模型</span>
+                    <span className="font-medium text-[var(--text-primary)]">一个API直连全模型</span>
                     <span className="ml-auto flex items-center gap-1.5 whitespace-nowrap font-mono text-[11px] text-[var(--text-muted)]">
                       <Link2 size={12} />
-                      https://tooken.ai/v1
+                      https://api.tooken.ai/v1
                     </span>
                   </span>
                   <span className="flex items-center gap-2">
@@ -437,13 +517,40 @@ export function HeroSection() {
                 <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[var(--bg-subtle)] text-[var(--text-secondary)]">
                   <MessageCircleMore size={16} />
                 </span>
-                <input
-                  value={question}
-                  onChange={(event) => setQuestion(event.target.value)}
-                  placeholder={isZh ? "Do what you love ..." : "Do what you love ..."}
-                  className="h-12 flex-1 bg-transparent px-1 text-[16px] text-[var(--text-primary)] outline-none placeholder:text-[var(--text-muted)]"
-                />
-                <Button size="lg" className="h-11 w-11 rounded-full p-0" disabled={!question.trim()} aria-label={isZh ? "发送" : "Send"}>
+                <div className="relative h-12 flex-1">
+                  {!question.trim() ? (
+                    <div className="pointer-events-none absolute inset-0 z-10 flex items-center px-1 text-[16px] text-[var(--text-muted)]">
+                      <span>{placeholderText}</span>
+                      <motion.span
+                        aria-hidden
+                        className="ml-0.5 inline-block"
+                        animate={{ opacity: [1, 0.15, 1] }}
+                        transition={{ duration: 1, repeat: Infinity, ease: "easeInOut" }}
+                      >
+                        |
+                      </motion.span>
+                    </div>
+                  ) : null}
+                  <input
+                    value={question}
+                    onChange={(event) => setQuestion(event.target.value)}
+                    onKeyDown={(event) => {
+                      if (event.key === "Enter") {
+                        event.preventDefault();
+                        handleSendQuestion();
+                      }
+                    }}
+                    placeholder=""
+                    className="relative z-20 h-12 w-full bg-transparent px-1 text-[16px] text-[var(--text-primary)] outline-none"
+                  />
+                </div>
+                <Button
+                  size="lg"
+                  className="h-11 w-11 rounded-full p-0"
+                  disabled={!question.trim()}
+                  aria-label={isZh ? "发送" : "Send"}
+                  onClick={handleSendQuestion}
+                >
                   <Send className="h-4 w-4" />
                 </Button>
               </div>

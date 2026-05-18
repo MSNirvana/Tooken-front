@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { models } from "@/lib/constants";
 import { useLocaleContext } from "@/components/providers/LocaleContext";
@@ -59,9 +60,9 @@ export function ModelsMarquee() {
         </div>
       </div>
       <div className="mt-10 text-center">
-        <a href="#" className="inline-flex items-center gap-2 text-[15px] font-medium text-[var(--text-brand)] transition-all hover:gap-3">
+        <Link href="/models" className="inline-flex items-center gap-2 text-[15px] font-medium text-[var(--text-brand)] transition-all hover:gap-3">
           {isZh ? "查看全部模型" : "Explore all models"} <ArrowRight size={15} />
-        </a>
+        </Link>
       </div>
     </section>
   );

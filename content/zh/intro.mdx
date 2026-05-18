@@ -1,0 +1,50 @@
+---
+title: 什么是 Tooken
+description: Tooken 是聚合全球主流 AI 模型的一体化接入平台。
+updatedAt: 2026-05
+---
+
+## 平台定位
+
+Tooken 提供统一的 `base_url` 与 API 协议，让你在不改业务结构的前提下接入多模型能力。
+
+## 核心价值
+
+- 一个密钥，调用多个模型供应商
+- 支持自动路由策略，按成本与效果动态选择模型
+- 提供企业级配额、审计与支付能力
+
+<Callout type="success">如果你之前已接入 OpenAI SDK，通常只需替换 `base_url` 即可迁移到 Tooken。</Callout>
+
+## 最小示例
+
+```bash {2,5-6}
+curl https://api.tooken.ai/v1/chat/completions \
+  -H "Authorization: Bearer $TOOKEN_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "auto",
+    "messages": [{"role": "user", "content": "Hello"}]
+  }'
+```
+
+## 多语言示例
+
+<CodeTabs labels={["Python", "Node.js", "curl"]}>
+  <CodeBlock language="python">{`from openai import OpenAI
+
+client = OpenAI(
+  api_key="YOUR_TOKEN",
+  base_url="https://api.tooken.ai/v1",
+)`}</CodeBlock>
+  <CodeBlock language="javascript">{`import OpenAI from "openai";
+
+const client = new OpenAI({
+  apiKey: process.env.TOOKEN_API_KEY,
+  baseURL: "https://api.tooken.ai/v1",
+});`}</CodeBlock>
+  <CodeBlock language="bash">{`curl https://api.tooken.ai/v1/chat/completions \
+  -H "Authorization: Bearer $TOOKEN_API_KEY"`}</CodeBlock>
+</CodeTabs>
+
+> 下一步可以阅读快速上手文档，完成注册和 API Key 配置。
